@@ -8,16 +8,16 @@ package com.rat.control;
  *
  */
 public class RatControlHelper {
-	
-	public boolean isAmountWithDescription (int i,String[] A, String[]B){
-		
-		if(A[i].isEmpty() || B[i].isEmpty()){
-			return false;
+
+	public static boolean isAmountWithDescription(int i, String[] A, String[] B) {
+
+		boolean hasValues = false;
+		if (A[i].isEmpty() || B[i].isEmpty() || A[i] == "" || B[i] == "") {
+			//leave as false
+		} else {
+			hasValues = true;
 		}
-		else{
-			return true;
-		}
-		
+		return hasValues;
 	}
 
 }
