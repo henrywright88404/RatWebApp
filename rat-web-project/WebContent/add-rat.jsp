@@ -173,7 +173,7 @@
 				<div class="form-group">
 				<div id="paymentFigureFields">
 					<div class="row">
-					
+					<input type="hidden" name="paymentType" value="notselected">
 						<div class="col-lg-2">
 							<div class="dropdown">
 		  						<button onclick="payment_dropdown_title()" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span id="dropdown_title" name="payment_type"> Payment type </span><span class="caret"></span></button>
@@ -241,6 +241,9 @@
 		$(".dropdown-menu").on('click', 'li', function(){
 			// this dropdown menus row, find the dropdown_title's html content and sets it as the option that was clicked 
 	  		$(this).closest('.row').find("#dropdown_title").html($(this).find('a').html());
+	  		var type = $(this).closest('.row').find("#paymentType")
+	  		
+	  		type.value = $(this).find('a').html();
 	
 		});
 	}

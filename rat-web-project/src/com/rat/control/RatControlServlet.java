@@ -181,28 +181,35 @@ public class RatControlServlet extends HttpServlet {
 			}
 		}
 
-		for (int i = 0; i < retainingWallDescription.length; i++) {
-			if (RatControlHelper.isAmountWithDescription(i, retainingWallDescription, retainingWallAmount)) {
-				System.out.println(retainingWallDescription[i] + " " + Double.parseDouble(retainingWallAmount[i]));
-				tempRat.addReserveFigures(retainingWallDescription[i], Double.parseDouble(retainingWallAmount[i]),
-						retWallNote[i]);
+		if (retainingWallDescription != null) {
+			for (int i = 0; i < retainingWallDescription.length; i++) {
+				if (RatControlHelper.isAmountWithDescription(i, retainingWallDescription, retainingWallAmount)) {
+					System.out.println(retainingWallDescription[i] + " " + Double.parseDouble(retainingWallAmount[i]));
+					tempRat.addReserveFigures(retainingWallDescription[i], Double.parseDouble(retainingWallAmount[i]),
+							retWallNote[i]);
+				}
 			}
 		}
 
-		for (int i = 0; i < laDescription.length; i++) {
-			if (RatControlHelper.isAmountWithDescription(i, laDescription, laAmount)) {
-				System.out.println(laDescription[i] + " " + Double.parseDouble(laAmount[i]));
-				tempRat.addReserveFigures(laDescription[i], Double.parseDouble(laAmount[i]), laNote[i]);
-			}
+		if (laDescription != null) {
+			for (int i = 0; i < laDescription.length; i++) {
+				if (RatControlHelper.isAmountWithDescription(i, laDescription, laAmount)) {
+					System.out.println(laDescription[i] + " " + Double.parseDouble(laAmount[i]));
+					tempRat.addReserveFigures(laDescription[i], Double.parseDouble(laAmount[i]), laNote[i]);
+				}
 
+			}
 		}
 
-		for (int i = 0; i < legalFeeDescription.length; i++) {
-			if (RatControlHelper.isAmountWithDescription(i, legalFeeDescription, legalFeeAmount)) {
-				System.out.println(legalFeeDescription[i] + " " + Double.parseDouble(legalFeeAmount[i]));
-				tempRat.addReserveFigures(legalFeeDescription[i], Double.parseDouble(legalFeeAmount[i]), legalNote[i]);
-			}
+		if (legalFeeDescription != null) {
+			for (int i = 0; i < legalFeeDescription.length; i++) {
+				if (RatControlHelper.isAmountWithDescription(i, legalFeeDescription, legalFeeAmount)) {
+					System.out.println(legalFeeDescription[i] + " " + Double.parseDouble(legalFeeAmount[i]));
+					tempRat.addReserveFigures(legalFeeDescription[i], Double.parseDouble(legalFeeAmount[i]),
+							legalNote[i]);
+				}
 
+			}
 		}
 		// if (lossOfRentDescription.length >0 ){
 		// for ( int i = 0; i < lossOfRentDescription.length; i++){

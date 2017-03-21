@@ -49,6 +49,48 @@ public class ReserveFigures implements Serializable{
 	public String toString() {
 		return "ReserveFigures [name=" + name + ", amount=" + amount + ", sourceOfData=" + sourceOfData + "]";
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(amount);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((sourceOfData == null) ? 0 : sourceOfData.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof ReserveFigures))
+			return false;
+		ReserveFigures other = (ReserveFigures) obj;
+		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (sourceOfData == null) {
+			if (other.sourceOfData != null)
+				return false;
+		} else if (!sourceOfData.equals(other.sourceOfData))
+			return false;
+		return true;
+	}
 	
 	
 
