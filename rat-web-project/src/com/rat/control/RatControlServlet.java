@@ -1,6 +1,7 @@
 package com.rat.control;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -50,6 +51,46 @@ public class RatControlServlet extends HttpServlet {
 		try {
 			// read the command param
 			String theCommand = request.getParameter("command");
+
+			if (theCommand == null) {
+				theCommand = "LIST";
+			}
+			// route to appopriate method
+			switch (theCommand) {
+			case "LIST":
+				listRats(request, response);
+				break;
+			case "ADD":
+				addRat(request, response);
+				break;
+			case "DELETE":
+				deleteRat(request, response);
+				break;
+
+			default:
+				listRats(request, response);
+			}
+
+			// list the students ... in MVC fashion
+			listRats(request, response);
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			// read the command param
+			String theCommand = request.getParameter("command");
+			
+			Enumeration<String> params = request.getParameterNames(); 
+			while(params.hasMoreElements()){
+			 String paramName = (String)params.nextElement();
+			 System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
+			}
 
 			if (theCommand == null) {
 				theCommand = "LIST";
@@ -135,11 +176,20 @@ public class RatControlServlet extends HttpServlet {
 		String[] claimNumbers = request.getParameterValues("claimnumbers");
 		// TODO implement
 
-		String[] paymentType = request.getParameterValues("payment_type");
+		String[] paymentType = request.getParameterValues("PaymentType");
 
-		String[] paymentDescription = request.getParameterValues("payment_description");
+		String[] paymentName = request.getParameterValues("Paymentname");
 
-		String[] paymentAmount = request.getParameterValues("payment_amount");
+		String[] paymentAmount = request.getParameterValues("Paymentamount");
+		
+		String[] paymentEvent = request.getParameterValues("PaymentEvent");
+		
+		
+		for (String e : paymentType){
+			if(e!=null){
+				System.out.println(e);
+			}
+		}
 
 		// TODO add payments capture
 
@@ -210,6 +260,16 @@ public class RatControlServlet extends HttpServlet {
 				}
 
 			}
+		}
+		
+		if (paymentName != null ){
+			for (int i= 0; i < paymentName.length; i++){
+				if(RatControlHelper.isAmountWithDescription(i, paymentName, paymentAmount)){
+					tempRat.addPayment(paymentName[i],Double.parseDouble(paymentAmount[i]), paymentType[i], paymentEvent[i]);
+				}
+			}
+		}else{
+			System.out.println("No payment or not picking it up. ");
 		}
 		// if (lossOfRentDescription.length >0 ){
 		// for ( int i = 0; i < lossOfRentDescription.length; i++){

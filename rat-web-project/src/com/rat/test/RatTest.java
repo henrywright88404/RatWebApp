@@ -139,6 +139,7 @@ public class RatTest {
 		Payment pay = new Payment("Test", 300, "N/a");
 
 		assertEquals(test.get(0), pay);
+		assertEquals(rat.getTotal(), -300,0.01);
 	}
 
 	@Test
@@ -192,7 +193,7 @@ public class RatTest {
 
 		BigDecimal bd = new BigDecimal(18538);
 
-		assertEquals(rat.getTotal(), bd);
+		assertEquals(rat.getTotal(), bd.doubleValue(),0.01);
 
 	}
 

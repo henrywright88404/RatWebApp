@@ -49,15 +49,15 @@ public class RatDbUtil {
 
 				byte[] buf = myRs.getBytes("rat");
 				ObjectInputStream objectIn = null;
+				Object deSerializedObject = null;
+				Rat tempRat = new Rat();
 				if (buf != null){
 					objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
+					deSerializedObject = objectIn.readObject();
+					tempRat = (Rat) deSerializedObject;
 				}else{
 					System.out.println("not pulling up rat");
 				}
-
-				Object deSerializedObject = objectIn.readObject();
-				
-				Rat tempRat = (Rat) deSerializedObject;
 				
 				if(tempRat != null){
 					tempRat.setId(id);	

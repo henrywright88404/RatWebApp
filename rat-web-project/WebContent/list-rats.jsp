@@ -46,6 +46,7 @@
 				<c:param name="ratMainClaim" value="${tempRat.getMainClaim() }"/>
 			</c:url>
 			
+			
 			<c:url var="deleteLink" value="RatControlServlet">
 				<c:param name="command" value="DELETE"/>
 				<c:param name="id" value="${tempRat.getId() }"/>

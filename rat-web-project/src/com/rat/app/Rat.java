@@ -85,10 +85,11 @@ public class Rat implements Serializable {
 		Apportionment = apportionment;
 	}
 
-	public BigDecimal getTotal() {
-		return Total;
+	public double getTotal() {
+		return Total.doubleValue();
 	}
 
+	@SuppressWarnings("unused")
 	private void setTotal(BigDecimal total) {
 		Total = total;
 	}
