@@ -129,6 +129,9 @@ public class Rat implements Serializable {
 	public void setCat3Apportionment(String event, double apportionmentFigure) {
 		Cat3Apportionment.setApportionment(event, apportionmentFigure);
 	}
+	public void setCat3Apportionment(Apportionment c3) {
+		this.Cat3Apportionment = c3;
+	}
 
 	public Apportionment getRetainingWallApportionment() {
 		return RetainingWallApportionment;

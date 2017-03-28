@@ -24,6 +24,10 @@ public class Apportionment  implements Serializable{
 	DecimalFormat df = new DecimalFormat("#,###,###.00");
 	DecimalFormat percentage = new DecimalFormat("##.##%");
 
+	public String[] getEventsList(){
+		return events;
+	}
+	
 	public void calculateAndSetApportionment(double SEPT2010, double DEC2010, double FEB2011, double JUNE2011,
 			double DEC2011) {
 		setApportionment("SEPT2010", SEPT2010 / (SEPT2010 + DEC2010 + FEB2011 + JUNE2011 + DEC2011));
@@ -98,9 +102,6 @@ public class Apportionment  implements Serializable{
 		if (totalapportionment != 1.0){
 			System.out.println("There is an error with the apportionment %. \n Try entering the apportionment again, the current apportionment is ");
 			getApportionment();
-//			userInputApportionment();
-			JOptionPane.showMessageDialog(null, "Apportionment is incorrect please review");
-			
 		}
 	}
 

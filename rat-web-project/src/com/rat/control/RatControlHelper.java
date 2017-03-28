@@ -3,6 +3,8 @@
  */
 package com.rat.control;
 
+import com.rat.app.Apportionment;
+
 /**
  * @author Marc
  *
@@ -18,6 +20,27 @@ public class RatControlHelper {
 			hasValues = true;
 		}
 		return hasValues;
+	}
+
+	public static Apportionment setApportionment(String[] claimapportionment) {
+		
+		Apportionment temp = new Apportionment();
+		String[] events = temp.getEventsList();
+		
+		for (int i = 0; i < claimapportionment.length ;i++){
+			System.out.println("Apportionment " + events[i] + " " + claimapportionment[i]);
+			
+			if (!claimapportionment[i].isEmpty()){
+				temp.setApportionment(events[i], Double.parseDouble(claimapportionment[i])/100);
+			}
+		}
+		
+		temp.checkApportionmentInput();
+		
+		
+		return temp;
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -95,7 +95,7 @@ public class RatControlServlet extends HttpServlet {
 			if (theCommand == null) {
 				theCommand = "LIST";
 			}
-			// route to appopriate method
+			// route to appropriate method
 			switch (theCommand) {
 			case "LIST":
 				listRats(request, response);
@@ -146,6 +146,8 @@ public class RatControlServlet extends HttpServlet {
 		String[] cat3amount = request.getParameterValues("cat3Amount");
 		// get Cat 3 note
 		String[] cat3Note = request.getParameterValues("cat3Note");
+		// get Cat 3 apportionment
+		String[] cat3Apportionment = request.getParameterValues("cat3apportionment");
 
 		// get retaining wall descriptions
 		String[] retainingWallDescription = request.getParameterValues("retainingwall");
@@ -153,6 +155,8 @@ public class RatControlServlet extends HttpServlet {
 		String[] retainingWallAmount = request.getParameterValues("retainingwallamount");
 		// get Rtaining wall note
 		String[] retWallNote = request.getParameterValues("retWallNote");
+		// get retaining wall apportionment
+		String[] retainingWallApportionment = request.getParameterValues("retainingWallApportionment");
 
 		// get LA fee descriptions
 		String[] laDescription = request.getParameterValues("lossadjuster");
@@ -174,7 +178,8 @@ public class RatControlServlet extends HttpServlet {
 		String[] lossOfRentAmount = request.getParameterValues("lossofrentamount");
 
 		String[] claimNumbers = request.getParameterValues("claimnumbers");
-		// TODO implement
+		
+		String[] claimapportionment = request.getParameterValues("apportionment");
 
 		String[] paymentType = request.getParameterValues("PaymentType");
 
@@ -182,18 +187,12 @@ public class RatControlServlet extends HttpServlet {
 
 		String[] paymentAmount = request.getParameterValues("Paymentamount");
 		
-		String[] paymentEvent = request.getParameterValues("PaymentEvent");
+		String[] paymentEvent = request.getParameterValues("PaymentEvent");	
 		
+
 		
-		for (String e : paymentType){
-			if(e!=null){
-				System.out.println(e);
-			}
-		}
 
-		// TODO add payments capture
-
-		// TODO create Rat object
+		// create Rat object
 
 		Rat tempRat = new Rat();
 
@@ -206,6 +205,9 @@ public class RatControlServlet extends HttpServlet {
 			}
 		}
 
+		tempRat.setApportionment(RatControlHelper.setApportionment(claimapportionment));
+		
+		
 		for (int i = 0; i < resFigureDescription.length; i++) {
 
 			System.out.println(i);
@@ -221,6 +223,7 @@ public class RatControlServlet extends HttpServlet {
 			}
 
 		}
+		
 
 		if (cat3description != null) {
 			for (int i = 0; i < cat3description.length; i++) {
@@ -230,6 +233,8 @@ public class RatControlServlet extends HttpServlet {
 				}
 			}
 		}
+		
+		tempRat.setCat3Apportionment(RatControlHelper.setApportionment(cat3Apportionment));
 
 		if (retainingWallDescription != null) {
 			for (int i = 0; i < retainingWallDescription.length; i++) {
@@ -240,6 +245,8 @@ public class RatControlServlet extends HttpServlet {
 				}
 			}
 		}
+		
+		tempRat.setRetainingWallApportionment(RatControlHelper.setApportionment(retainingWallApportionment));
 
 		if (laDescription != null) {
 			for (int i = 0; i < laDescription.length; i++) {
@@ -280,10 +287,10 @@ public class RatControlServlet extends HttpServlet {
 		// }
 		// }
 
-		// TODO add the rat to the Db
+		//  add the rat to the Db
 		ratDbUtil.addRat(tempRat);
 
-		// TODO send back to main page
+		//  send back to main page
 		listRats(request, response);
 	}
 
@@ -297,6 +304,8 @@ public class RatControlServlet extends HttpServlet {
 		// send to JSP page (view)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-rats.jsp");
 		dispatcher.forward(request, response);
+		
+		;
 
 	}
 
