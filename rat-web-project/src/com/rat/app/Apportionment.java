@@ -77,6 +77,10 @@ public class Apportionment  implements Serializable{
 		return apportionmentAsString;
 		
 	}
+	
+	public String getApportionment(int poss) {
+		return Double.toString(apportionment[poss]*100);
+	}
 
 	/**
 	 * @param apportionment
@@ -135,6 +139,8 @@ public class Apportionment  implements Serializable{
 		return "Apportionment [events=" + Arrays.toString(events) + ", apportionment=" + Arrays.toString(apportionment)
 				+ ", df=" + df + ", percentage=" + percentage + "]";
 	}
+
+
 	
 	
 	

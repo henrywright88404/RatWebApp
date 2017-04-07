@@ -13,6 +13,10 @@ public class ReserveFigures implements Serializable{
 	private String name;
 	private double amount;
 	private String sourceOfData;
+	
+	public ReserveFigures(){
+		
+	};
 
 	public ReserveFigures(String name, double amount, String sourceOfData ) {
 		this.name = name;

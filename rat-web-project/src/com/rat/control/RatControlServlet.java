@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+
 import com.rat.app.Rat;
 import com.rat.dbutil.RatDbUtil;
 
@@ -66,6 +67,8 @@ public class RatControlServlet extends HttpServlet {
 			case "DELETE":
 				deleteRat(request, response);
 				break;
+			case "LOAD":
+				loadRat(request,response);
 
 			default:
 				listRats(request, response);
@@ -89,7 +92,7 @@ public class RatControlServlet extends HttpServlet {
 			Enumeration<String> params = request.getParameterNames(); 
 			while(params.hasMoreElements()){
 			 String paramName = (String)params.nextElement();
-			 System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
+			 System.out.println("Parameter Name - "+paramName+", \t\t Value - "+request.getParameter(paramName));
 			}
 
 			if (theCommand == null) {
@@ -106,6 +109,8 @@ public class RatControlServlet extends HttpServlet {
 			case "DELETE":
 				deleteRat(request, response);
 				break;
+			case "LOAD":
+				loadRat(request,response);
 
 			default:
 				listRats(request, response);
@@ -116,6 +121,24 @@ public class RatControlServlet extends HttpServlet {
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
+	}
+
+	private void loadRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+				// read Rat id  
+				String ratId = request.getParameter("ratId");
+				
+				// get rat from database(dbUtil)
+				Rat theRat = ratDbUtil.getSelectedRat(ratId);
+				
+				System.out.print(theRat.getCat3ReserveFigures().toString());
+				
+				// place student in the request attribute 
+				request.setAttribute("THE_RAT", theRat);
+				
+				// send to jsp page 
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/view-rat.jsp");
+				dispatcher.forward(request, response);
+		
 	}
 
 	private void deleteRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -133,15 +156,18 @@ public class RatControlServlet extends HttpServlet {
 
 	private void addRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO read form data
+		
+		String[] claimNumbers = request.getParameterValues("claimnumbers");
+		
+		String[] claimapportionment = request.getParameterValues("apportionment");
+		
 		// get all reserve figure descriptions
 		String[] resFigureDescription = request.getParameterValues("reserveFiguresDescripton");
 		//
 		String[] resFigureSource = request.getParameterValues("reserveFiguresNote");
 		// get all reserve figure amounts
 		String[] resFigureAmounts = request.getParameterValues("reserveFiguresAmount");
-
-		// get Cat 3 description
-		String[] cat3description = request.getParameterValues("cat3");
+		
 		// get Cat 3 amounts
 		String[] cat3amount = request.getParameterValues("cat3Amount");
 		// get Cat 3 note
@@ -149,37 +175,12 @@ public class RatControlServlet extends HttpServlet {
 		// get Cat 3 apportionment
 		String[] cat3Apportionment = request.getParameterValues("cat3apportionment");
 
-		// get retaining wall descriptions
-		String[] retainingWallDescription = request.getParameterValues("retainingwall");
 		// get retaining wall amounts
 		String[] retainingWallAmount = request.getParameterValues("retainingwallamount");
-		// get Rtaining wall note
+		// get Retaining wall note
 		String[] retWallNote = request.getParameterValues("retWallNote");
 		// get retaining wall apportionment
 		String[] retainingWallApportionment = request.getParameterValues("retainingWallApportionment");
-
-		// get LA fee descriptions
-		String[] laDescription = request.getParameterValues("lossadjuster");
-		// get LA fee amounts
-		String[] laAmount = request.getParameterValues("lossadjusteramount");
-		// get LA note
-		String[] laNote = request.getParameterValues("laNote");
-
-		// get legal fee descriptions
-		String[] legalFeeDescription = request.getParameterValues("legalfees");
-		// get legal fee amounts
-		String[] legalFeeAmount = request.getParameterValues("legalfeesAmount");
-		// get legal note
-		String[] legalNote = request.getParameterValues("legalNote");
-
-		// get LOR descrptions
-		String[] lossOfRentDescription = request.getParameterValues("lossofrent");
-		// get LOR fee amounts
-		String[] lossOfRentAmount = request.getParameterValues("lossofrentamount");
-
-		String[] claimNumbers = request.getParameterValues("claimnumbers");
-		
-		String[] claimapportionment = request.getParameterValues("apportionment");
 
 		String[] paymentType = request.getParameterValues("PaymentType");
 
@@ -209,38 +210,32 @@ public class RatControlServlet extends HttpServlet {
 		
 		
 		for (int i = 0; i < resFigureDescription.length; i++) {
-
-			System.out.println(i);
-
-			System.out.println(RatControlHelper.isAmountWithDescription(i, resFigureDescription, resFigureAmounts));
-
 			if (RatControlHelper.isAmountWithDescription(i, resFigureDescription, resFigureAmounts)) {
+				
 				System.out.println(resFigureDescription[i] + " " + Double.parseDouble(resFigureAmounts[i]));
 				tempRat.addReserveFigures(resFigureDescription[i], Double.parseDouble(resFigureAmounts[i]),
 						resFigureSource[i]);
-			} else {
-
 			}
 
 		}
 		
 
-		if (cat3description != null) {
-			for (int i = 0; i < cat3description.length; i++) {
-				if (RatControlHelper.isAmountWithDescription(i, cat3description, cat3amount)) {
-					System.out.println(cat3description[i] + " " + Double.parseDouble(cat3amount[i]));
-					tempRat.addCat3ReserveFigures(cat3description[i], Double.parseDouble(cat3amount[i]), cat3Note[i]);
+		if (cat3Note != null) {
+			for (int i = 0; i < cat3Note.length; i++) {
+				if (RatControlHelper.isAmountWithDescription(i, cat3Note, cat3amount)) {
+					System.out.println(cat3Note[i] + " " + Double.parseDouble(cat3amount[i]));
+					tempRat.addCat3ReserveFigures(cat3Note[i], Double.parseDouble(cat3amount[i]), cat3Note[i]);
 				}
 			}
 		}
 		
 		tempRat.setCat3Apportionment(RatControlHelper.setApportionment(cat3Apportionment));
 
-		if (retainingWallDescription != null) {
-			for (int i = 0; i < retainingWallDescription.length; i++) {
-				if (RatControlHelper.isAmountWithDescription(i, retainingWallDescription, retainingWallAmount)) {
-					System.out.println(retainingWallDescription[i] + " " + Double.parseDouble(retainingWallAmount[i]));
-					tempRat.addReserveFigures(retainingWallDescription[i], Double.parseDouble(retainingWallAmount[i]),
+		if (retWallNote != null) {
+			for (int i = 0; i < retWallNote.length; i++) {
+				if (RatControlHelper.isAmountWithDescription(i, retWallNote, retainingWallAmount)) {
+					System.out.println(retWallNote[i] + " " + Double.parseDouble(retainingWallAmount[i]));
+					tempRat.addReserveFigures(retWallNote[i], Double.parseDouble(retainingWallAmount[i]),
 							retWallNote[i]);
 				}
 			}
@@ -248,26 +243,6 @@ public class RatControlServlet extends HttpServlet {
 		
 		tempRat.setRetainingWallApportionment(RatControlHelper.setApportionment(retainingWallApportionment));
 
-		if (laDescription != null) {
-			for (int i = 0; i < laDescription.length; i++) {
-				if (RatControlHelper.isAmountWithDescription(i, laDescription, laAmount)) {
-					System.out.println(laDescription[i] + " " + Double.parseDouble(laAmount[i]));
-					tempRat.addReserveFigures(laDescription[i], Double.parseDouble(laAmount[i]), laNote[i]);
-				}
-
-			}
-		}
-
-		if (legalFeeDescription != null) {
-			for (int i = 0; i < legalFeeDescription.length; i++) {
-				if (RatControlHelper.isAmountWithDescription(i, legalFeeDescription, legalFeeAmount)) {
-					System.out.println(legalFeeDescription[i] + " " + Double.parseDouble(legalFeeAmount[i]));
-					tempRat.addReserveFigures(legalFeeDescription[i], Double.parseDouble(legalFeeAmount[i]),
-							legalNote[i]);
-				}
-
-			}
-		}
 		
 		if (paymentName != null ){
 			for (int i= 0; i < paymentName.length; i++){
@@ -278,17 +253,12 @@ public class RatControlServlet extends HttpServlet {
 		}else{
 			System.out.println("No payment or not picking it up. ");
 		}
-		// if (lossOfRentDescription.length >0 ){
-		// for ( int i = 0; i < lossOfRentDescription.length; i++){
-		// //System.out.println(lossOfRentDescription[i]+ " " +
-		// Double.parseDouble(lossOfRentAmount[i]));
-		// tempRat.addReserveFigures(lossOfRentDescription[i],
-		// Double.parseDouble(lossOfRentAmount[i]));
-		// }
-		// }
+
 
 		//  add the rat to the Db
 		ratDbUtil.addRat(tempRat);
+		
+		System.out.println("Cat 3 added =" + tempRat.getCat3ReserveFigures().toString());
 
 		//  send back to main page
 		listRats(request, response);

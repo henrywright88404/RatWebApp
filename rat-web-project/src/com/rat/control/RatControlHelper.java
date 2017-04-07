@@ -26,20 +26,22 @@ public class RatControlHelper {
 		
 		Apportionment temp = new Apportionment();
 		String[] events = temp.getEventsList();
+		boolean appUpdated = false;
 		
 		for (int i = 0; i < claimapportionment.length ;i++){
 			System.out.println("Apportionment " + events[i] + " " + claimapportionment[i]);
 			
 			if (!claimapportionment[i].isEmpty()){
 				temp.setApportionment(events[i], Double.parseDouble(claimapportionment[i])/100);
+				appUpdated = true;
 			}
 		}
 		
-		temp.checkApportionmentInput();
-		
+		if (appUpdated = true ){
+			temp.checkApportionmentInput();
+		}
 		
 		return temp;
-		// TODO Auto-generated method stub
 		
 	}
 

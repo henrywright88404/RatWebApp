@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,6 +154,50 @@ public class RatDbUtil {
 				
 			}
 		}
+
+	public Rat getSelectedRat(String id) throws Exception {
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		
+		try{
+			// get a connection 
+			myConn = dataSource.getConnection();
+			
+			// generate sql statementto select this rat
+			String sql = "select * from web_rat_db.rat where id="+id;
+			myStmt = myConn.createStatement();
+			
+			// Execute query 
+			myRs = myStmt.executeQuery(sql);
+			Rat tempRat = new Rat();
+			//process result set
+			while (myRs.next()){
+			
+				// Retrieve data from result set 
+
+				byte[] buf = myRs.getBytes("rat");
+				ObjectInputStream objectIn = null;
+				Object deSerializedObject = null;
+				
+				if (buf != null){
+					objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
+					deSerializedObject = objectIn.readObject();
+					tempRat = (Rat) deSerializedObject;
+				}else{
+					System.out.println("not pulling up rat in getSelected rat in RatDbUtil.java");
+				}
+				
+			}		
+			return tempRat;
+		}
+		finally{
+			
+			// close JDBC objects
+			close(myConn,myStmt,myRs);
+		}
+	}
 
 			
 		

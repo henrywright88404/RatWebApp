@@ -81,6 +81,10 @@ public class Rat implements Serializable {
 		return Apportionment.getApportionment();
 	}
 
+	public String getApportionment(int poss) {
+		return Apportionment.getApportionment(poss);
+	}
+
 	public void setApportionment(Apportionment apportionment) {
 		Apportionment = apportionment;
 	}
@@ -126,9 +130,10 @@ public class Rat implements Serializable {
 		return Cat3Apportionment.getApportionment();
 	}
 
-	public void setCat3Apportionment(String event, double apportionmentFigure) {
-		Cat3Apportionment.setApportionment(event, apportionmentFigure);
-	}
+	// public void setCat3Apportionment(String event, double
+	// apportionmentFigure) {
+	// Cat3Apportionment.setApportionment(event, apportionmentFigure);
+	// }
 	public void setCat3Apportionment(Apportionment c3) {
 		this.Cat3Apportionment = c3;
 	}
@@ -147,14 +152,17 @@ public class Rat implements Serializable {
 
 	public void addCat3ReserveFigures(String name, double amount, String sourceOfData) {
 		Cat3ReserveFigures.add(new ReserveFigures(name, amount, sourceOfData));
+		addToTotal(BigDecimal.valueOf(amount));
 	}
 
 	public List<ReserveFigures> getRetainingWallFigures() {
 		return RetainingWallFigures;
+
 	}
 
 	public void addRetainingWallFigures(String name, double amount, String sourceOfData) {
 		RetainingWallFigures.add(new ReserveFigures(name, amount, sourceOfData));
+		addToTotal(BigDecimal.valueOf(amount));
 	}
 
 	public int getId() {

@@ -7,8 +7,14 @@
 <html>
 <head>
 	<title>Reserve Apportionment Template</title>
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -41,9 +47,9 @@
 			
 			<c:forEach var = "tempRat" items="${RAT_LIST }">
 			
-			<c:url var="updateLink" value="RatControlServlet">
+			<c:url var="viewLink" value="RatControlServlet">
 				<c:param name="command" value="LOAD"/>
-				<c:param name="ratMainClaim" value="${tempRat.getMainClaim() }"/>
+				<c:param name="ratId" value="${tempRat.getId() }"/>
 			</c:url>
 			
 			
@@ -51,12 +57,17 @@
 				<c:param name="command" value="DELETE"/>
 				<c:param name="id" value="${tempRat.getId() }"/>
 			</c:url>
+				<!-- //TODO implement Edit Rat page -->			
+			<c:url var="editLink" value="RatControlServlet">
+				<c:param name="command" value="EDIT"/>
+				<c:param name="id" value="${tempRat.getId() }"/>
+			</c:url>
 			
 			 	<tr>
 			 		<td> ${tempRat.getMainClaim()} </td>
 			 		<td> ${tempRat.getCustomerName()}  </td>
 			 		<td> ${tempRat.getTotal() }
-			 		<td> <a href="${updateLink }">Update</a> | <a href="${deleteLink }" onclick="if(!(confirm('Are you sure you want to delete this RAT?'))) return false" >Delete</a> </td>
+			 		<td> <a href="${viewLink }">View</a> | <a href="${deleteLink }" onclick="if(!(confirm('Are you sure you want to delete this RAT?'))) return false" >Delete</a> </td>
 			 	</tr>
 			</c:forEach>
 			

@@ -3,11 +3,17 @@
 <html>
 <head>
 <title>Reserve Apportionment Template</title>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -197,22 +203,21 @@
 			</div>
 			<div class="col-sm-3 nopadding">
 				<div class="form-group">
-					<input type="number" class="form-control" id="PaymentAmount" name="Paymentamount"
-						value="" placeholder="Payment Amount">
+					<input type="number" class="form-control" id="PaymentAmount"
+						name="Paymentamount" value="" placeholder="Payment Amount">
 				</div>
 			</div>
-			<div class="col-sm-1 nopadding">
+			<div class="col-sm-2 nopadding">
 				<div class="form-group">
 					<div class="input-group">
-							<select class="form-control" id="PaymentEvent"
-								name="PaymentEvent">
-								<option value="">Event</option>
-								<option value="SEPT2010">SEPT2010</option>
-								<option value="DEC2010">DEC2010</option>
-								<option value="FEB2011">FEB2011</option>
-								<option value="JUNE2011">JUNE2011</option>
-								<option value="DEC2011">DEC2011</option>
-							</select>
+						<select class="form-control" id="PaymentEvent" name="PaymentEvent">
+							<option value="">Event</option>
+							<option value="SEPT2010">SEPT2010</option>
+							<option value="DEC2010">DEC2010</option>
+							<option value="FEB2011">FEB2011</option>
+							<option value="JUNE2011">JUNE2011</option>
+							<option value="DEC2011">DEC2011</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -220,8 +225,7 @@
 			<div class="col-sm-3 nopadding">
 				<div class="form-group">
 					<div class="input-group">
-						<select class="form-control" id="PaymentType"
-							name="PaymentType">
+						<select class="form-control" id="PaymentType" name="PaymentType">
 
 							<option value="">Payment Type</option>
 							<option value="Claim_Payment">Claim Payment</option>
@@ -276,7 +280,7 @@
 					'Scoping Report Costs', 'Geotech Report Costs',
 					'Engineering Costs', 'CWI Premium Costs',
 					'Architectural / Design Costs', 'Other', 'Other', 'Other',
-					'LA Fees Costs', 'Legal Fees'];
+					'LA Fees Costs', 'Legal Fees','Loss of Rent'];
 
 			for (i = 0; i < fields.length; i++) {
 				var objTo = document.getElementById("reserveFigureFields");
@@ -299,9 +303,9 @@
 			var divtest = document.createElement("div");
 			divtest.setAttribute("class", "form-group removeclass" + room);
 			var rdiv = 'removeclass' + room;
-			divtest.innerHTML = '<div class="col-sm-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Paymentname" name="Paymentname" value="" placeholder="Reason for payment"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input type="number" class="form-control" id="Paymentamount" name="Paymentamount" value="" placeholder="Payment Amount"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Paymentnote" name="Paymentnote" value="" placeholder="Payment note"></div></div><div class="col-sm-3 nopadding"><div class="form-group"><div class="input-group"> <select class="form-control" id="PaymentType" name="PaymentType"><option value="">Payment Type</option><option value="Claim_Payment">Claim Payment</option><option value="Legal_Payment">Legal Fees</option><option value="LOR_Payment">Loss Of Rent</option><option value="Accomodation">Accomodation</option> </select><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_payment_fields('
+			divtest.innerHTML = '<div class="col-sm-3 nopadding"><div class="form-group"><input type="text" class="form-control" id="PaymentName" name="Paymentname" value="" placeholder="Reason for payment"></div></div><div class="col-sm-3 nopadding"><div class="form-group"><input type="number" class="form-control" id="PaymentAmount"name="Paymentamount" value= "" placeholder="Payment Amount"></div></div><div class="col-sm-2 nopadding"><div class="form-group"><div class="input-group"><select class="form-control" id="PaymentEvent" name="PaymentEvent"><option value=>Event</option><option value="SEPT2010">SEPT2010</option><option value="DEC2010">DEC2010</option><option value="FEB2011">FEB2011</option><option value="JUNE2011">JUNE2011</option><option value="DEC2011">DEC2011</option></select></div></div></div><div class="col-sm-3 nopadding"><div class="form-group"><div class="input-group"><select class="form-control" id="PaymentType" name="PaymentType"><option value="">Payment Type</option><option value="Claim_Payment">Claim Payment</option><option value="Legal_Payment">Legal Fees</option><option value="LOR_Payment">Loss Of Rent</option><option value="Accommodation">Accommodation</option></select><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_payment_fields('
 					+ room
-					+ ');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button></div></div></div></div><div class="clear"></div>';
+					+ ');"> <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button></div></div></div></div><div class="clear"></div>';
 
 			objTo.appendChild(divtest)
 		}
