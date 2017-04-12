@@ -121,12 +121,12 @@ public class RatControlServlet extends HttpServlet {
 		// read Rat id
 		String ratId = request.getParameter("ratId");
 
-		// get rat from database(dbUtil)
+		// get Rat from database(dbUtil)
 		Rat theRat = ratDbUtil.getSelectedRat(ratId);
 
 		System.out.print(theRat.getCat3ReserveFigures().toString());
 
-		// place student in the request attribute
+		// place Rat in the request attribute
 		request.setAttribute("THE_RAT", theRat);
 
 		// send to jsp page

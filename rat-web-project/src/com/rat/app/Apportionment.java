@@ -1,16 +1,14 @@
 package com.rat.app;
 
-
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-public class Apportionment  implements Serializable{
+public class Apportionment implements Serializable {
 
 	/**
 	 * 
@@ -24,10 +22,10 @@ public class Apportionment  implements Serializable{
 	DecimalFormat df = new DecimalFormat("#,###,###.00");
 	DecimalFormat percentage = new DecimalFormat("##.##%");
 
-	public String[] getEventsList(){
+	public String[] getEventsList() {
 		return events;
 	}
-	
+
 	public void calculateAndSetApportionment(double SEPT2010, double DEC2010, double FEB2011, double JUNE2011,
 			double DEC2011) {
 		setApportionment("SEPT2010", SEPT2010 / (SEPT2010 + DEC2010 + FEB2011 + JUNE2011 + DEC2011));
@@ -45,7 +43,7 @@ public class Apportionment  implements Serializable{
 		nf.setMinimumFractionDigits(2);
 		for (int i = 0; i <= 4; i++) {
 
-			if (apportionment[i] < 0.0001) {
+			if (apportionment[i] < 0.01) {
 				// Skip printing if the apportionment is zero
 			} else {
 				System.out.print(events[i] + " ");
@@ -55,31 +53,31 @@ public class Apportionment  implements Serializable{
 		System.out.println(" ");
 
 	}
-	
-	public double getApportionment(String event, double figure){
-		
-		for(int i= 0; i<=4; i++){
-			 if (event.equalsIgnoreCase(this.events[i])){
+
+	public double getApportionment(String event, double figure) {
+
+		for (int i = 0; i <= 4; i++) {
+			if (event.equalsIgnoreCase(this.events[i])) {
 				return figure * apportionment[i];
 			}
 		}
-		
+
 		return 0.0;
 	}
-	
-	public String[] getApportionment(){
+
+	public String[] getApportionment() {
 		String[] apportionmentAsString = new String[5];
 		int poss = 0;
-		for(double apportionmentPercent : apportionment){
+		for (double apportionmentPercent : apportionment) {
 			apportionmentAsString[poss] = Double.toString(apportionmentPercent);
 		}
-		
+
 		return apportionmentAsString;
-		
+
 	}
-	
+
 	public String getApportionment(int poss) {
-		return Double.toString(apportionment[poss]*100);
+		return Double.toString(apportionment[poss] * 100);
 	}
 
 	/**
@@ -95,44 +93,62 @@ public class Apportionment  implements Serializable{
 			}
 
 		}
-		
+
 	}
-	
-	public void checkApportionmentInput(){
+
+	public void checkApportionmentInput() {
 		double totalapportionment = 0.0;
-		for(double elements: apportionment)	{
-			totalapportionment = totalapportionment+elements;
+		for (double elements : apportionment) {
+			totalapportionment = totalapportionment + elements;
 		}
-		if (totalapportionment != 1.0){
-			System.out.println("There is an error with the apportionment %. \n Try entering the apportionment again, the current apportionment is ");
+
+		if (totalapportionment == 0) {
+			return;
+		} else if (totalapportionment != 1.0) {
+			System.out.println(
+					"There is an error with the apportionment %. \n Try entering the apportionment again, the current apportionment is ");
 			getApportionment();
 		}
 	}
 
 	public List<String> returnApportionedReserveFigures(double figure) {
 		List<String> returnString = new ArrayList<>();
-		
+
 		for (int i = 0; i <= 4; i++) {
 			if (apportionment[i] == 0) {
 				returnString.add("");
 
 			} else {
-				returnString.add(" $"+ df.format(figure * apportionment[i]) + " ");
+				returnString.add(" $" + df.format(figure * apportionment[i]) + " ");
 			}
 		}
 		return returnString;
 	}
-//	public void userInputApportionment(){
-//		System.out.println("Do you know the apportionment? Enter Y or N");
-//		Scanner reader = new Scanner(System.in);
-//
-//		if (reader.hasNext() && (reader.nextLine().equalsIgnoreCase("y"))) {
-//
-//			RatData.Rat.addKnownApportionment();
-//
-//		} else {
-//			RatData.Rat.addUnknownApportionment();
-//		}
+	
+	public List<String> returnApportionedReserveFigures(BigDecimal figure) {
+		List<String> returnString = new ArrayList<>();
+
+		for (int i = 0; i <= 4; i++) {
+			if (apportionment[i] == 0) {
+				returnString.add("");
+
+			} else {
+				returnString.add(" $" + df.format(figure.doubleValue() * apportionment[i]) + " ");
+			}
+		}
+		return returnString;
+	}
+	// public void userInputApportionment(){
+	// System.out.println("Do you know the apportionment? Enter Y or N");
+	// Scanner reader = new Scanner(System.in);
+	//
+	// if (reader.hasNext() && (reader.nextLine().equalsIgnoreCase("y"))) {
+	//
+	// RatData.Rat.addKnownApportionment();
+	//
+	// } else {
+	// RatData.Rat.addUnknownApportionment();
+	// }
 
 	@Override
 	public String toString() {
@@ -140,9 +156,4 @@ public class Apportionment  implements Serializable{
 				+ ", df=" + df + ", percentage=" + percentage + "]";
 	}
 
-
-	
-	
-	
-	}
-
+}

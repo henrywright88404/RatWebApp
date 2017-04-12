@@ -33,61 +33,49 @@
 
 			<h3 class="text-center">New Rat</h3>
 
+			<div class="col-xs-12">
+				<div class="table-responsive">
+					<table>
+						<tr>
+							<th>Event</th>
+							<td class="text-center">Sept</td>
+							<td class="text-center">Dec</td>
+							<td class="text-center">Feb</td>
+							<td class="text-center">June</td>
+							<td class="text-center">Dec</td>
+						</tr>
+						<tr>
+							<th>Claim Numbers</th>
+							<td><input type="text" class="form-control"
+								name="claimnumbers" value="0" /></td>
+							<td><input type="text" class="form-control"
+								name="claimnumbers" value="0" /></td>
+							<td><input type="text" class="form-control"
+								name="claimnumbers" value="0" /></td>
+							<td><input type="text" class="form-control"
+								name="claimnumbers" value="0" /></td>
+							<td><input type="text" class="form-control"
+								name="claimnumbers" value="0" /></td>
+						</tr>
+						<tr>
+							<th>Apportionment</th>
+							<td><input type="number" class="form-control"
+								name="apportionment" value="0" /></td>
+							<td><input type="number" class="form-control"
+								name="apportionment" value="0" /></td>
+							<td><input type="number" class="form-control"
+								name="apportionment" value="0" /></td>
+							<td><input type="number" class="form-control"
+								name="apportionment" value="0" /></td>
+							<td><input type="number" class="form-control"
+								name="apportionment" value="0" /></td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
 
 
-
-
-			<div class="col-sm-2">
-				<h6 class="text-center">Claim Numbers</h6>
-			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name="claimnumbers"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name="claimnumbers"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name="claimnumbers"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name="claimnumbers"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name="claimnumbers"
-					value="0" />
-			</div>
-			<br> <br>
-
-
-
-
-			<div class="col-sm-2">
-				<h6 class="text-center">Claim Apportionment</h6>
-			</div>
-			<div class="col-sm-2">
-				<input type="number" class="form-control" name="apportionment"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="number" class="form-control" name="apportionment"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="number" class="form-control" name="apportionment"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="number" class="form-control" name="apportionment"
-					value="0" />
-			</div>
-			<div class="col-sm-2">
-				<input type="number" class="form-control" name="apportionment"
-					value="0" />
-			</div>
 			<br> <br>
 
 
@@ -280,7 +268,7 @@
 					'Scoping Report Costs', 'Geotech Report Costs',
 					'Engineering Costs', 'CWI Premium Costs',
 					'Architectural / Design Costs', 'Other', 'Other', 'Other',
-					'LA Fees Costs', 'Legal Fees','Loss of Rent'];
+					'LA Fees Costs', 'Legal Fees', 'Loss of Rent' ];
 
 			for (i = 0; i < fields.length; i++) {
 				var objTo = document.getElementById("reserveFigureFields");

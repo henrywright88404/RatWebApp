@@ -92,6 +92,10 @@ public class Rat implements Serializable {
 	public double getTotal() {
 		return Total.doubleValue();
 	}
+	
+	public List<String> getApportionedClaimReserve(){
+		return Apportionment.returnApportionedReserveFigures(Total);
+	}
 
 	@SuppressWarnings("unused")
 	private void setTotal(BigDecimal total) {
