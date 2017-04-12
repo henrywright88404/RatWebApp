@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-
 import com.rat.app.Rat;
 import com.rat.dbutil.RatDbUtil;
 
@@ -25,7 +24,7 @@ public class RatControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private RatDbUtil ratDbUtil;
-	private RatControlHelper rCHelper;
+	
 
 	@Resource(name = "jdbc/rat-web-project")
 	private DataSource dataSource;
@@ -68,31 +67,31 @@ public class RatControlServlet extends HttpServlet {
 				deleteRat(request, response);
 				break;
 			case "LOAD":
-				loadRat(request,response);
+				loadRat(request, response);
 
-			default:
-				listRats(request, response);
 			}
 
-			// list the students ... in MVC fashion
-			listRats(request, response);
+			
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}
-	
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			// read the command param
 			String theCommand = request.getParameter("command");
-			
-			Enumeration<String> params = request.getParameterNames(); 
-			while(params.hasMoreElements()){
-			 String paramName = (String)params.nextElement();
-			 System.out.println("Parameter Name - "+paramName+", \t\t Value - "+request.getParameter(paramName));
+
+			Enumeration<String> params = request.getParameterNames();
+			while (params.hasMoreElements()) {
+				String paramName = (String) params.nextElement();
+				System.out
+						.println("Parameter Name - " + paramName + ", \t\t Value - " + request.getParameter(paramName));
 			}
 
 			if (theCommand == null) {
@@ -110,35 +109,30 @@ public class RatControlServlet extends HttpServlet {
 				deleteRat(request, response);
 				break;
 			case "LOAD":
-				loadRat(request,response);
-
-			default:
-				listRats(request, response);
+				loadRat(request, response);
 			}
 
-			// list the students ... in MVC fashion
-			listRats(request, response);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}
 
 	private void loadRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
-				// read Rat id  
-				String ratId = request.getParameter("ratId");
-				
-				// get rat from database(dbUtil)
-				Rat theRat = ratDbUtil.getSelectedRat(ratId);
-				
-				System.out.print(theRat.getCat3ReserveFigures().toString());
-				
-				// place student in the request attribute 
-				request.setAttribute("THE_RAT", theRat);
-				
-				// send to jsp page 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/view-rat.jsp");
-				dispatcher.forward(request, response);
-		
+		// read Rat id
+		String ratId = request.getParameter("ratId");
+
+		// get rat from database(dbUtil)
+		Rat theRat = ratDbUtil.getSelectedRat(ratId);
+
+		System.out.print(theRat.getCat3ReserveFigures().toString());
+
+		// place student in the request attribute
+		request.setAttribute("THE_RAT", theRat);
+
+		// send to jsp page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/view-rat.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 	private void deleteRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -156,18 +150,18 @@ public class RatControlServlet extends HttpServlet {
 
 	private void addRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO read form data
-		
+
 		String[] claimNumbers = request.getParameterValues("claimnumbers");
-		
+
 		String[] claimapportionment = request.getParameterValues("apportionment");
-		
+
 		// get all reserve figure descriptions
 		String[] resFigureDescription = request.getParameterValues("reserveFiguresDescripton");
 		//
 		String[] resFigureSource = request.getParameterValues("reserveFiguresNote");
 		// get all reserve figure amounts
 		String[] resFigureAmounts = request.getParameterValues("reserveFiguresAmount");
-		
+
 		// get Cat 3 amounts
 		String[] cat3amount = request.getParameterValues("cat3Amount");
 		// get Cat 3 note
@@ -187,11 +181,8 @@ public class RatControlServlet extends HttpServlet {
 		String[] paymentName = request.getParameterValues("Paymentname");
 
 		String[] paymentAmount = request.getParameterValues("Paymentamount");
-		
-		String[] paymentEvent = request.getParameterValues("PaymentEvent");	
-		
 
-		
+		String[] paymentEvent = request.getParameterValues("PaymentEvent");
 
 		// create Rat object
 
@@ -207,18 +198,16 @@ public class RatControlServlet extends HttpServlet {
 		}
 
 		tempRat.setApportionment(RatControlHelper.setApportionment(claimapportionment));
-		
-		
+
 		for (int i = 0; i < resFigureDescription.length; i++) {
 			if (RatControlHelper.isAmountWithDescription(i, resFigureDescription, resFigureAmounts)) {
-				
+
 				System.out.println(resFigureDescription[i] + " " + Double.parseDouble(resFigureAmounts[i]));
 				tempRat.addReserveFigures(resFigureDescription[i], Double.parseDouble(resFigureAmounts[i]),
 						resFigureSource[i]);
 			}
 
 		}
-		
 
 		if (cat3Note != null) {
 			for (int i = 0; i < cat3Note.length; i++) {
@@ -228,39 +217,37 @@ public class RatControlServlet extends HttpServlet {
 				}
 			}
 		}
-		
+
 		tempRat.setCat3Apportionment(RatControlHelper.setApportionment(cat3Apportionment));
 
 		if (retWallNote != null) {
 			for (int i = 0; i < retWallNote.length; i++) {
 				if (RatControlHelper.isAmountWithDescription(i, retWallNote, retainingWallAmount)) {
-					System.out.println(retWallNote[i] + " " + Double.parseDouble(retainingWallAmount[i]));
-					tempRat.addReserveFigures(retWallNote[i], Double.parseDouble(retainingWallAmount[i]),
+					tempRat.addRetainingWallFigures(retWallNote[i], Double.parseDouble(retainingWallAmount[i]),
 							retWallNote[i]);
 				}
 			}
 		}
-		
+
 		tempRat.setRetainingWallApportionment(RatControlHelper.setApportionment(retainingWallApportionment));
 
-		
-		if (paymentName != null ){
-			for (int i= 0; i < paymentName.length; i++){
-				if(RatControlHelper.isAmountWithDescription(i, paymentName, paymentAmount)){
-					tempRat.addPayment(paymentName[i],Double.parseDouble(paymentAmount[i]), paymentType[i], paymentEvent[i]);
+		if (paymentName != null) {
+			for (int i = 0; i < paymentName.length; i++) {
+				if (RatControlHelper.isAmountWithDescription(i, paymentName, paymentAmount)) {
+					tempRat.addPayment(paymentName[i], Double.parseDouble(paymentAmount[i]), paymentType[i],
+							paymentEvent[i]);
 				}
 			}
-		}else{
+		} else {
 			System.out.println("No payment or not picking it up. ");
 		}
 
-
-		//  add the rat to the Db
+		// add the rat to the Db
 		ratDbUtil.addRat(tempRat);
-		
+
 		System.out.println("Cat 3 added =" + tempRat.getCat3ReserveFigures().toString());
 
-		//  send back to main page
+		// send back to main page
 		listRats(request, response);
 	}
 
@@ -274,8 +261,7 @@ public class RatControlServlet extends HttpServlet {
 		// send to JSP page (view)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-rats.jsp");
 		dispatcher.forward(request, response);
-		
-		;
+		return;
 
 	}
 

@@ -123,7 +123,7 @@ public class RatTest {
 	public final void testGetPayment() {
 		Rat rat = new Rat();
 		rat.addPayment("Test", 300, "N/a", "SEPT2010");
-		List<Payment> test = rat.getPayment();
+		List<Payment> test = rat.getPayments();
 
 		Payment pay = new Payment("Test", 300, "N/a");
 
@@ -134,7 +134,7 @@ public class RatTest {
 	public final void testAddPayment() {
 		Rat rat = new Rat();
 		rat.addPayment("Test", 300, "N/a", "SEPT2010");
-		List<Payment> test = rat.getPayment();
+		List<Payment> test = rat.getPayments();
 
 		Payment pay = new Payment("Test", 300, "N/a");
 

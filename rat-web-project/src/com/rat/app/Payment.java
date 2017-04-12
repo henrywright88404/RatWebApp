@@ -22,6 +22,22 @@ public class Payment extends ReserveFigures {
 	public Payment(String name, double amount, String note) {
 		super(name, amount,note);
 	}
+	
+	
+
+	/**
+	 * @return the event
+	 */
+	public String getEvent() {
+		return event;
+	}
+
+	/**
+	 * @param event the event to set
+	 */
+	public void setEvent(String event) {
+		this.event = event;
+	}
 
 	@Override
 	public String toString() {

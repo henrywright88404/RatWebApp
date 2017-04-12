@@ -68,7 +68,7 @@ public class Rat implements Serializable {
 		addToTotal(BigDecimal.valueOf(amount));
 	}
 
-	public List<Payment> getPayment() {
+	public List<Payment> getPayments() {
 		return Payment;
 	}
 
@@ -129,6 +129,9 @@ public class Rat implements Serializable {
 	public String[] getCat3Apportionment() {
 		return Cat3Apportionment.getApportionment();
 	}
+	public String getCat3Apportionment(int poss) {
+		return Cat3Apportionment.getApportionment(poss);
+	}
 
 	// public void setCat3Apportionment(String event, double
 	// apportionmentFigure) {
@@ -138,8 +141,11 @@ public class Rat implements Serializable {
 		this.Cat3Apportionment = c3;
 	}
 
-	public Apportionment getRetainingWallApportionment() {
-		return RetainingWallApportionment;
+	public String[] getRetainingWallApportionment() {
+		return RetainingWallApportionment.getApportionment();
+	}
+	public String getRetainingWallApportionment(int poss) {
+		return RetainingWallApportionment.getApportionment(poss);
 	}
 
 	public void setRetainingWallApportionment(Apportionment retainingWallApportionment) {

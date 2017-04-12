@@ -25,7 +25,7 @@
 	<div class="row">
 		<h2 class="text-center">Reserve Apportionment Template View</h2>
 	</div>
-
+<div class="row">
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tr>
@@ -49,6 +49,18 @@
 				<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(2) }</td>
 				<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(3) }</td>
 				<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(4) }</td>
+				<td class="col-sm-2">
+				<td>
+			</tr>
+			<tr>
+				<td class="col-sm-2">
+				<td>
+				<th class="col-sm-2 nopadding">Apportionment</th>
+				<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(0) }%</td>
+				<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(1) }%</td>
+				<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(2) }%</td>
+				<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(3) }%</td>
+				<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(4) }%</td>
 				<td class="col-sm-2">
 				<td>
 			</tr>
@@ -85,7 +97,7 @@
 							<td class="col-sm-2 nopadding"><c:out
 									value="${tempReserveFigures.getName() }" /></td>
 							<td class="col-sm-2 nopadding"><c:out
-									value="${tempReserveFigures.getAmount() }" /></td>
+									value="$ ${tempReserveFigures.getAmount() }" /></td>
 						</tr>
 					</c:forEach>
 				</tr>
@@ -103,21 +115,62 @@
 					<td class="col-sm-6 nopadding">
 						<h4>Cat 3 Figures</h4>
 					</td>
+
 				</tr>
+				<tr>
+					<th class="col-sm-2 nopadding">Apportionment</th>
+					<td class="col-sm-1 nopadding">SEPT</td>
+					<td class="col-sm-1 nopadding">DEC</td>
+					<td class="col-sm-1 nopadding">FEB</td>
+					<td class="col-sm-1 nopadding">JUNE</td>
+					<td class="col-sm-1 nopadding">DEC</td>
+					<td class="col-sm-2">
+				</tr>
+				<tr>
+					<th class="col-sm-2 nopadding"></th>
+					<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(0) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(1) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(2) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(3) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(4) }%</td>
+					<td class="col-sm-2">
+				</tr>
+
 			</table>
 			<table class="table table-striped">
 				<c:forEach var="tempCat3ReserveFigures"
 					items="${THE_RAT.getCat3ReserveFigures() }">
 					<tr>
 						<td><c:out value="${tempCat3ReserveFigures.getName() }" /></td>
-						<td><c:out value="${tempCat3ReserveFigures.getAmount() }" /></td>
+						<td><c:out value="$ ${tempCat3ReserveFigures.getAmount() }" /></td>
 					</tr>
 				</c:forEach>
+			</table>
+			<table class="table-responsive">
 
 				<tr>
 					<td class="col-sm-6 nopadding">
 						<h4>Retaining Wall Figures</h4>
 					</td>
+				</tr>
+				<tr>
+					<th class="col-sm-2 nopadding">Apportionment</th>
+					<td class="col-sm-1 nopadding">SEPT</td>
+					<td class="col-sm-1 nopadding">DEC</td>
+					<td class="col-sm-1 nopadding">FEB</td>
+					<td class="col-sm-1 nopadding">JUNE</td>
+					<td class="col-sm-1 nopadding">DEC</td>
+					<td class="col-sm-2">
+				</tr>
+				<tr>
+
+					<th class="col-sm-2 nopadding"></th>
+					<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(0) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(1) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(2) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(3) }%</td>
+					<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(4) }%</td>
+					<td class="col-sm-2">
 				</tr>
 
 				<c:forEach var="tempRetainingWallFigure"
@@ -134,12 +187,40 @@
 			</table>
 		</div>
 	</div>
+</div>
+<div class="row"> <h3 class ="text-center">Payments</h3></div>
 
+
+<div class="table-responsive">
+	<table class= "table-striped">
+	<tr>
+		<th class="col-sm-1 nopadding">Reason for Payment</th>
+		<th class="col-sm-1 nopadding">Source of Data</th>
+		<th class="col-sm-1 nopadding">Event paid under</th>
+		<th class="col-sm-1 nopadding">Amount Paid</th>
+	</tr>
+		<c:forEach var="tempPaymentsList" items="${THE_RAT.getPayments() }">
+			<tr>
+				<td class="col-sm-1 nopadding"><c:out value="${tempPaymentsList.getName()}"/></td>
+				<td class="col-sm-1 nopadding"><c:out value="${tempPaymentsList.getSourceOfData()}"/></td>
+				<td class="col-sm-1 nopadding"><c:out value="${tempPaymentsList.getEvent()}"/></td>
+				<td class="col-sm-1 nopadding"><c:out value="$ ${tempPaymentsList.getAmount()}"/></td>
+			</tr>
+		
+		</c:forEach>
+	
+	
+	</table>
+</div>
 
 
 
 	<p>
 		<a href="RatControlServlet">Back to List</a>
+	</p>
+
+	<p>
+		<c:out value="${THE_RAT.toString() }" />
 	</p>
 
 
