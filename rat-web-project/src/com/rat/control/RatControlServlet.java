@@ -51,11 +51,11 @@ public class RatControlServlet extends HttpServlet {
 		try {
 			// read the command param
 			String theCommand = request.getParameter("command");
-
+			
 			if (theCommand == null) {
 				theCommand = "LIST";
 			}
-			// route to appopriate method
+
 			switch (theCommand) {
 			case "LIST":
 				listRats(request, response);
@@ -68,9 +68,11 @@ public class RatControlServlet extends HttpServlet {
 				break;
 			case "LOAD":
 				loadRat(request, response);
-
+				break;
+			case "EDIT":
+				editRat(request, response);
+				break;
 			}
-
 			
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -110,8 +112,10 @@ public class RatControlServlet extends HttpServlet {
 				break;
 			case "LOAD":
 				loadRat(request, response);
+				break;
 			case "EDIT":
 				editRat(request, response);
+				break;
 			}
 
 		} catch (Exception e) {

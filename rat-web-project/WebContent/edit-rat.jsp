@@ -24,7 +24,7 @@
 
 	<form action="RatControlServlet" method="post">
 		<input type="hidden" name="command" value="EDIT" />
-		<input type="hidden" name="id" value=${THE_RAT.getID() }/>
+		
 
 		<div class="row">
 			<h2 class="text-center">Reserve Apportionment Template View</h2>
