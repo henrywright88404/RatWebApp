@@ -110,11 +110,30 @@ public class RatControlServlet extends HttpServlet {
 				break;
 			case "LOAD":
 				loadRat(request, response);
+			case "EDIT":
+				editRat(request, response);
 			}
 
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
+	}
+
+	private void editRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// read Rat id
+		String ratId = request.getParameter("ratId");
+
+		// get Rat from database(dbUtil)
+		Rat theRat = ratDbUtil.getSelectedRat(ratId);
+
+
+		// place Rat in the request attribute
+		request.setAttribute("THE_RAT", theRat);
+
+		// send to jsp page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/edit-rat.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 	private void loadRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -123,8 +142,6 @@ public class RatControlServlet extends HttpServlet {
 
 		// get Rat from database(dbUtil)
 		Rat theRat = ratDbUtil.getSelectedRat(ratId);
-
-		System.out.print(theRat.getCat3ReserveFigures().toString());
 
 		// place Rat in the request attribute
 		request.setAttribute("THE_RAT", theRat);

@@ -245,7 +245,7 @@
 
 
 		<p>
-			<a href="RatControlServlet">Back to List</a>
+			<a href="RatControlServlet">Back to List</a> | 
 		</p>
 
 		<p>

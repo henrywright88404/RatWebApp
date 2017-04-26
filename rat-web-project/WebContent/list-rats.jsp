@@ -57,7 +57,8 @@
 				<c:param name="command" value="DELETE"/>
 				<c:param name="id" value="${tempRat.getId() }"/>
 			</c:url>
-				<!-- //TODO implement Edit Rat page -->			
+				<!-- //TODO implement Edit Rat page -->	
+						
 			<c:url var="editLink" value="RatControlServlet">
 				<c:param name="command" value="EDIT"/>
 				<c:param name="id" value="${tempRat.getId() }"/>
@@ -67,7 +68,7 @@
 			 		<td> ${tempRat.getMainClaim()} </td>
 			 		<td> ${tempRat.getCustomerName()}  </td>
 			 		<td> ${tempRat.getTotal() }
-			 		<td> <a href="${viewLink }">View</a> | <a href="${deleteLink }" onclick="if(!(confirm('Are you sure you want to delete this RAT?'))) return false" >Delete</a> </td>
+			 		<td> <a href="${viewLink }">View</a> | <a href="${editLink }"> Edit </a> | <a href="${deleteLink }" onclick="if(!(confirm('Are you sure you want to delete this RAT?'))) return false" >Delete</a> </td>
 			 	</tr>
 			</c:forEach>
 			

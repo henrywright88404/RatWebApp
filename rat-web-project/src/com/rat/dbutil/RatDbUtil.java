@@ -136,25 +136,6 @@ public class RatDbUtil {
 		}
 
 		
-	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
-			try{
-				if(myRs!= null){
-					myRs = null;
-				}
-				if(myStmt != null){
-					myStmt = null;
-				}
-				
-				if(myConn!= null){
-					myConn=null;
-				}			
-			}
-			catch(Exception e){
-				e.printStackTrace();
-				
-			}
-		}
-
 	public Rat getSelectedRat(String id) throws Exception {
 		Connection myConn = null;
 		Statement myStmt = null;
@@ -198,7 +179,25 @@ public class RatDbUtil {
 			close(myConn,myStmt,myRs);
 		}
 	}
-
+	
+	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
+		try{
+			if(myRs!= null){
+				myRs.close();
+			}
+			if(myStmt != null){
+				myStmt.close();
+			}
+			
+			if(myConn!= null){
+				myConn.close();
+			}			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			
+		}
+	}
 			
 		
 
