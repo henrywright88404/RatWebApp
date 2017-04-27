@@ -48,11 +48,11 @@
 						<td class="col-sm-2">
 						<td>
 						<th class="col-sm-2 nopadding">Claim Numbers</th>
-						<td class="col-sm-1 nopadding"><input type="text" value="${THE_RAT.getClaimNumber(0) }"/></td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(1) }</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(2) }</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(3) }</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getClaimNumber(4) }</td>
+						<td class="col-sm-1 nopadding"><input type="text" value="${THE_RAT.getClaimNumber(0) }" name="claimNumbers" class="form-control"/></td>
+						<td class="col-sm-1 nopadding"><input type="text" value="${THE_RAT.getClaimNumber(1) }" name="claimNumbers" class="form-control"/></td>
+						<td class="col-sm-1 nopadding"><input type="text" value="${THE_RAT.getClaimNumber(2) }" name="claimNumbers" class="form-control"/></td>
+						<td class="col-sm-1 nopadding"><input type="text" value="${THE_RAT.getClaimNumber(3) }" name="claimNumbers" class="form-control"/></td>
+						<td class="col-sm-1 nopadding"><input type="text" value="${THE_RAT.getClaimNumber(4) }" name="claimNumbers" class="form-control"/></td>
 						<td class="col-sm-2">
 						<td>
 					</tr>
@@ -60,11 +60,11 @@
 						<td class="col-sm-2">
 						<td>
 						<th class="col-sm-2 nopadding">Apportionment</th>
-						<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(0) }%</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(1) }%</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(2) }%</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(3) }%</td>
-						<td class="col-sm-1 nopadding">${THE_RAT.getApportionment(4) }%</td>
+						<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getApportionment(0) }" name="apportionment" class="form-control" /></td>
+						<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getApportionment(1) }" name="apportionment" class="form-control" /></td>
+						<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getApportionment(2) }" name="apportionment" class="form-control" /></td>
+						<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getApportionment(3) }" name="apportionment" class="form-control" /></td>
+						<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getApportionment(4) }" name="apportionment" class="form-control" /></td>
 						<td class="col-sm-2">
 						<td>
 					</tr>
@@ -97,10 +97,10 @@
 							<c:forEach var="tempReserveFigures"
 								items="${THE_RAT.getReserveFigures() }">
 								<tr>
-									<td class="col-sm-2 nopadding"><c:out
-											value="${tempReserveFigures.getName() }" /></td>
-									<td class="col-sm-2 nopadding"><c:out
-											value="$ ${tempReserveFigures.getAmount() }" /></td>
+									<td class="col-sm-2 nopadding">
+											<input type="text" value="${tempReserveFigures.getName() }" name="reserveFiguresDescripton" class="form-control"/></td>
+									<td class="col-sm-2 nopadding">
+											<input type="number" value="${tempReserveFigures.getAmount() }" step="0.01" name="reserveFiguresAmount" class="form-control"/> </td>
 								</tr>
 							</c:forEach>
 						</tr>
@@ -131,11 +131,11 @@
 						</tr>
 						<tr>
 							<th class="col-sm-2 nopadding"></th>
-							<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(0) }%</td>
-							<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(1) }%</td>
-							<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(2) }%</td>
-							<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(3) }%</td>
-							<td class="col-sm-1 nopadding">${THE_RAT.getCat3Apportionment(4) }%</td>
+							<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getCat3Apportionment(0) }" name="cat3apportionment" class="form-control"/></td>
+							<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getCat3Apportionment(1) }" name="cat3apportionment" class="form-control"/></td>
+							<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getCat3Apportionment(2) }" name="cat3apportionment" class="form-control"/></td>
+							<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getCat3Apportionment(3) }" name="cat3apportionment" class="form-control"/></td>
+							<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getCat3Apportionment(4) }" name="cat3apportionment" class="form-control"/></td>
 							<td class="col-sm-2">
 						</tr>
 
@@ -144,8 +144,8 @@
 						<c:forEach var="tempCat3ReserveFigures"
 							items="${THE_RAT.getCat3ReserveFigures() }">
 							<tr>
-								<td><c:out value="${tempCat3ReserveFigures.getName() }" /></td>
-								<td><c:out value="$ ${tempCat3ReserveFigures.getAmount() }" /></td>
+								<td><input type="text" value="${tempCat3ReserveFigures.getName() }" name="cat3Note" class="form-control"/></td>
+								<td><input type="number" value="${tempCat3ReserveFigures.getAmount() }" step="0.01" name="cat3Amount" class="form-control"/></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -170,19 +170,19 @@
 							<tr>
 
 								<th class="col-sm-2 nopadding"></th>
-								<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(0) }%</td>
-								<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(1) }%</td>
-								<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(2) }%</td>
-								<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(3) }%</td>
-								<td class="col-sm-1 nopadding">${THE_RAT.getRetainingWallApportionment(4) }%</td>
+								<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getRetainingWallApportionment(0) }" name="retainingWallApportionment" class="form-control"/></td>
+								<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getRetainingWallApportionment(1) }" name="retainingWallApportionment" class="form-control"/></td>
+								<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getRetainingWallApportionment(2) }" name="retainingWallApportionment" class="form-control"/></td>
+								<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getRetainingWallApportionment(3) }" name="retainingWallApportionment" class="form-control"/></td>
+								<td class="col-sm-1 nopadding"><input type="number" value="${THE_RAT.getRetainingWallApportionment(4) }" name="retainingWallApportionment" class="form-control"/></td>
 								<td class="col-sm-2">
 							</tr>
 
 							<c:forEach var="tempRetainingWallFigure"
 								items="${THE_RAT.getRetainingWallFigures() }">
 								<tr>
-									<td><c:out value="${tempRetainingWallFigure.getName() }" /></td>
-									<td><c:out value="${tempRetainingWallFigure.getAmount() }" /></td>
+									<td><input type="text" value="${tempRetainingWallFigure.getName() }" name="retWallNote" class="form-control"/></td>
+									<td><input type="number" value="${tempRetainingWallFigure.getAmount() }" step="0.01" name="retainingwallamount" class="form-control"/></td>
 								</tr>
 							</c:forEach>
 
@@ -233,14 +233,37 @@
 					</tr>
 					<c:forEach var="tempPaymentsList" items="${THE_RAT.getPayments() }">
 						<tr>
-							<td class="col-sm-3 nopadding"><c:out
-									value="${tempPaymentsList.getName()}" /></td>
-							<td class="col-sm-3 nopadding"><c:out
-									value="${tempPaymentsList.getSourceOfData()}" /></td>
-							<td class="col-sm-3 nopadding"><c:out
-									value="${tempPaymentsList.getEvent()}" /></td>
-							<td class="col-sm-3 nopadding"><c:out
-									value="$ ${tempPaymentsList.getAmount()}" /></td>
+							<td class="col-sm-3 nopadding">
+									<input type="text" class="form-control" id="PaymentName"
+										name="Paymentname" value="${tempPaymentsList.getName()}">
+							</td>
+							<td class="col-sm-3 nopadding">
+								<div class="input-group">
+									<select class="form-control" id="PaymentType" name="PaymentType">
+										<option value="${tempPaymentsList.getSourceOfData()}">${tempPaymentsList.getSourceOfData()}</option>
+										<option value="Claim_Payment">Claim Payment</option>
+										<option value="Legal_Payment">Legal Fees</option>
+										<option value="LOR_Payment">Loss Of Rent</option>
+										<option value="Accommodation">Accommodation</option>
+									</select>
+								</div>
+							</td>
+							<td class="col-sm-3 nopadding">
+									<div class="input-group">
+										<select class="form-control" id="PaymentEvent" name="PaymentEvent">
+											<option value="${tempPaymentsList.getEvent()}">${tempPaymentsList.getEvent()}</option>
+											<option value="SEPT2010">SEPT2010</option>
+											<option value="DEC2010">DEC2010</option>
+											<option value="FEB2011">FEB2011</option>
+											<option value="JUNE2011">JUNE2011</option>
+											<option value="DEC2011">DEC2011</option>
+										</select>
+									</div>
+							</td>
+							<td class="col-sm-3 nopadding">
+								<input type="number" step="0.01" class="form-control" id="PaymentAmount"
+									name="Paymentamount" value="${tempPaymentsList.getAmount()}" placeholder="Payment Amount">
+							</td>
 						</tr>
 
 					</c:forEach>

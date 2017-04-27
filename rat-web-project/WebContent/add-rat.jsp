@@ -186,7 +186,7 @@
 			<div class="col-sm-3 nopadding">
 				<div class="form-group">
 					<input type="text" class="form-control" id="PaymentName"
-						name="Paymentname" value="" placeholder="Reson for payment">
+						name="Paymentname" value="" placeholder="Reason for payment">
 				</div>
 			</div>
 			<div class="col-sm-3 nopadding">

@@ -125,7 +125,7 @@ public class RatControlServlet extends HttpServlet {
 
 	private void editRat(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// read Rat id
-		String ratId = request.getParameter("ratId");
+		String ratId = request.getParameter("id");
 
 		// get Rat from database(dbUtil)
 		Rat theRat = ratDbUtil.getSelectedRat(ratId);
